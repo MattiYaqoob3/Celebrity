@@ -1,36 +1,33 @@
 package com.celebrityApp.celebrity_api.controllers;
 
 import com.celebrityApp.celebrity_api.DTO.user.CreateUserDTO;
-import com.celebrityApp.celebrity_api.models.Users;
-import com.celebrityApp.celebrity_api.repository.UserRepository;
-import org.apache.catalina.User;
+import com.celebrityApp.celebrity_api.services.UserServices;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
-import org.springframework.stereotype.Service;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Service
+@RestController
+@RequestMapping("/api/user")
 public class UserControllers {
-
     @Autowired
-    UserRepository userRepository;
+    private UserServices userServices;
 
-    public Users createuser (CreateUserDTO createUserDTO){
-        Users users = new Users(); // this user is from models
 
-        users.setUsername(createUserDTO.getUsername());
-        users.setUsername(createUserDTO.getUsername());
-        users.setPassword(createUserDTO.getPassword());
-        users.setDateOfBirth(createUserDTO.getDateOfBirth());
-        users.setEmail(createUserDTO.getEmail());
-        users.setFirstName(createUserDTO.getFirstName());
-        users.setLastName(createUserDTO.getLastName());
-        users.setAdress_city(createUserDTO.getAdress_city());
-        users.setAdress_street(createUserDTO.getAdress_street());
-        users.setAdress_postalCode(createUserDTO.getAdress_postalCode());
 
-        return userRepository.save(users);
+
+    @PostMapping("/post")
+    public ResponseEntity<?> createuser(@Valid @RequestBody CreateUserDTO createUserDTO){
+        try {
+            return ResponseEntity.ok(userServices.createuser(createUserDTO));
+        }catch (EnumConstantNotPresentException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
-
 
 
 }
