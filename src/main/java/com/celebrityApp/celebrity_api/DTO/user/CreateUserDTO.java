@@ -1,17 +1,12 @@
-package com.celebrityApp.celebrity_api.models;
+package com.celebrityApp.celebrity_api.DTO.user;
 
 import jakarta.validation.constraints.NotBlank;
-import org.springframework.data.annotation.Id;
 
-import org.springframework.data.mongodb.core.mapping.Document;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
-
-@Document(collection = "user")
-public class Users {
-
-    @Id
-    private String id;
-
+public class CreateUserDTO {
 
     @NotBlank(message = "Username cannot be blank")
     private String username;
@@ -22,14 +17,11 @@ public class Users {
     private String dateOfBirth;
     @NotBlank(message = "email cannot be blank")
     private String email;
-
-    private String photo = "dummy.png";
     @NotBlank(message = "firstName cannot be blank")
     private String firstName;
     @NotBlank(message = "lastName cannot be blank")
     private String lastName;
-
-
+    private Set<String> usersRoles = new HashSet<>();
     @NotBlank(message = "adress_street cannot be blank")
     private String adress_street;
     @NotBlank(message = "adress_postalcode cannot be blank")
@@ -37,35 +29,11 @@ public class Users {
     @NotBlank(message = "adress_city cannot be blank")
     private String adress_city;
 
-    private double balance = 0d;
+    private ArrayList<String> favouriteAuctions = new ArrayList<String>();
 
-    private double grade = 0d;
-
-    public Users() {
+    public CreateUserDTO() {
     }
 
-    public Users(String username, String password, String dateOfBirth, String email, String photo, String firstName, String lastName, String adress_street, String adress_postalCode, String adress_city, double balance, double grade) {
-        this.username = username;
-        this.password = password;
-        this.dateOfBirth = dateOfBirth;
-        this.email = email;
-        this.photo = photo;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.adress_street = adress_street;
-        this.adress_postalCode = adress_postalCode;
-        this.adress_city = adress_city;
-        this.balance = balance;
-        this.grade = grade;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;
@@ -99,14 +67,6 @@ public class Users {
         this.email = email;
     }
 
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -121,6 +81,14 @@ public class Users {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Set<String> getUsersRoles() {
+        return usersRoles;
+    }
+
+    public void setUsersRoles(Set<String> usersRoles) {
+        this.usersRoles = usersRoles;
     }
 
     public String getAdress_street() {
@@ -147,19 +115,11 @@ public class Users {
         this.adress_city = adress_city;
     }
 
-    public double getBalance() {
-        return balance;
+    public ArrayList<String> getFavouriteAuctions() {
+        return favouriteAuctions;
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
-
-    public double getGrade() {
-        return grade;
-    }
-
-    public void setGrade(double grade) {
-        this.grade = grade;
+    public void setFavouriteAuctions(ArrayList<String> favouriteAuctions) {
+        this.favouriteAuctions = favouriteAuctions;
     }
 }
