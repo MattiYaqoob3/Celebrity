@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.config.EnableMongoAuditing;
 @SpringBootApplication
 @EnableMongoAuditing
 public class CelebrityApiApplication {
+	//asdw
 
 	public static void main(String[] args) {
 		SpringApplication.run(CelebrityApiApplication.class, args);
