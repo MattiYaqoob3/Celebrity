@@ -41,6 +41,15 @@ public class Users {
 
     private double grade = 0d;
 
+    // Role
+
+
+
+
+
+
+
+
     public Users() {
     }
 
